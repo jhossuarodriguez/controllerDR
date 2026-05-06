@@ -1,0 +1,83 @@
+---
+import { products } from "@/lib/products";
+
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<section
+  class="bg-white px-4 py-24 max-md:py-[72px]"
+  id={id}
+  aria-labelledby="form-title"
+>
+  <div
+    class="mx-auto grid w-[min(100%,1200px)] grid-cols-1 gap-6 md:grid-cols-[0.95fr_1.05fr]"
+  >
+    <div>
+      <p class="mb-3 text-sm font-semibold text-graphite">Form</p>
+      <h2
+        class="mb-[42px] max-w-[780px] font-display text-[clamp(38px,6vw,64px)] font-bold leading-[1.07] tracking-[-0.9px]"
+        id="form-title"
+      >
+        Tell us what controller you want.
+      </h2>
+      <p class="text-[17px] leading-[1.47] text-graphite">
+        Send your request with the controller version you want and your
+        target price. We will confirm current availability and final
+        pricing.
+      </p>
+    </div>
+    <div class="rounded-[28px] bg-fog p-[clamp(28px,5vw,48px)]">
+      <form class="grid gap-3.5">
+        <label class="grid gap-[7px] text-sm text-slate"
+          >Full name<input
+            class="w-full rounded-[14px] border-0 bg-silver-mist px-4 py-[15px] text-[17px] text-ink transition hover:bg-[#dedee3] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-azure/30"
+            type="text"
+            name="name"
+            placeholder="Your name"
+            autocomplete="name"
+          /></label
+        >
+        <label class="grid gap-[7px] text-sm text-slate"
+          >Email<input
+            class="w-full rounded-[14px] border-0 bg-silver-mist px-4 py-[15px] text-[17px] text-ink transition hover:bg-[#dedee3] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-azure/30"
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+          /></label
+        >
+        <label class="grid gap-[7px] text-sm text-slate"
+          >Which controller do you want?<select
+            class="w-full rounded-[14px] border-0 bg-silver-mist px-4 py-[15px] text-[17px] text-ink transition hover:bg-[#dedee3] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-azure/30"
+            name="controller"
+            >{
+              products.map((product) => (
+                <option>
+                  {product.name} - {product.price}
+                </option>
+              ))
+            }<option>Any available PS5 controller version</option></select
+          ></label
+        >
+        <label class="grid gap-[7px] text-sm text-slate"
+          >Price<select
+            class="w-full rounded-[14px] border-0 bg-silver-mist px-4 py-[15px] text-[17px] text-ink transition hover:bg-[#dedee3] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-azure/30"
+            name="price"
+            ><option>RD$4,995 - RD$5,500</option><option
+              >RD$5,501 - RD$6,500</option
+            ><option>RD$6,501 - RD$8,500</option><option
+              >RD$9,000+ for DualSense Edge</option
+            ><option>Send me the best available price</option></select
+          ></label
+        >
+        <button
+          class="inline-flex min-h-9 items-center justify-center rounded-full bg-azure px-[18px] py-2 text-[17px] leading-none text-white transition hover:-translate-y-px hover:bg-[#005bb5] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-azure/30"
+          type="submit">Send request</button>
+      </form>
+    </div>
+  </div>
+</section>

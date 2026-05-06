@@ -1,0 +1,16 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<footer class:list={["bg-fog px-4 py-[34px] text-xs text-graphite", className]}>
+  <div
+    class="mx-auto flex w-[min(100%,1200px)] justify-between gap-[18px] border-t border-silver-mist pt-5 max-md:flex-col"
+  >
+    <span>Control RD. PS5 controllers in Dominican Republic.</span>
+    <span>WhatsApp orders, pickup, and local delivery coordination.</span>
+  </div>
+</footer>

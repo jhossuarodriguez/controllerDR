@@ -1,0 +1,36 @@
+---
+interface Props {
+  variant?: "home" | "inner";
+}
+
+const { variant = "home" } = Astro.props;
+---
+
+<header
+  class:list={[
+    "sticky top-0 z-20 border-b border-silver-mist/90 bg-fog/85 backdrop-blur-xl",
+    variant === "inner" && "bg-fog",
+  ]}
+>
+  <nav
+    class="mx-auto flex h-[52px] w-[min(100%-32px,1200px)] items-center justify-between gap-6"
+    aria-label="Main navigation"
+  >
+    <a
+      class="text-sm font-bold tracking-[-0.2px] transition-colors hover:text-ink"
+      href="/">Control RD</a>
+    <div class="hidden items-center gap-6 text-xs text-slate sm:flex">
+      <a class="transition-colors hover:text-ink" href="#sell"
+        >What we sell</a
+      >
+      <a class="transition-colors hover:text-ink" href="/products"
+        >Products</a
+      >
+      <a class="transition-colors hover:text-ink" href="#about">About</a>
+      <a class="transition-colors hover:text-ink" href="#order">Order</a>
+    </div>
+    <a
+      class="inline-flex min-h-9 items-center justify-center rounded-full bg-azure px-[18px] py-2 text-[17px] leading-none text-white transition hover:-translate-y-px hover:bg-[#005bb5] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-azure/30"
+      href="#order">Buy</a
+  </nav>
+</header>

@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+import { featuredHeroProduct } from "@/lib/products";
+
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<section
+  class="grid min-h-[calc(100vh-52px)] place-items-center px-4 py-16 text-center sm:py-20"
+  aria-labelledby="hero-title"
+  id={id}
+>
+  <div class="w-[min(100%,1200px)]">
+    <p
+      class="mb-2.5 text-[clamp(18px,2.3vw,24px)] font-semibold tracking-[-0.36px]"
+    >
+      PS5 controllers in Dominican Republic
+    </p>
+    <h1
+      id="hero-title"
+      class="mx-auto mb-[18px] max-w-[980px] font-display text-[clamp(54px,10vw,96px)] font-bold leading-[1.04] tracking-[-0.022em]"
+    >
+      DualSense delivered fast.
+    </h1>
+    <p
+      class="mx-auto mb-6 max-w-[680px] text-[clamp(17px,2vw,22px)] leading-[1.38] text-graphite"
+    >
+      Original Sony PS5 controllers, limited color drops, local support,
+      and same-day coordination across Santo Domingo and major provinces.
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <a
+        class="inline-flex min-h-9 items-center justify-center rounded-full bg-azure px-[18px] py-2 text-[17px] leading-none text-white transition hover:-translate-y-px hover:bg-[#005bb5] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-azure/30"
+        href="#order">Order now</a
+      >
+      <a
+        class="inline-flex min-h-9 items-center justify-center rounded-full bg-obsidian px-[18px] py-2 text-[17px] leading-none text-white transition hover:-translate-y-px"
+        href="/products">View Products</a
+      >
+    </div>
+    <div
+      class="mx-auto mt-11 w-[min(920px,92vw)] overflow-hidden rounded-[42px] p-[clamp(28px,5vw,54px)] max-sm:rounded-[30px]"
+    >
+      <Image
+        class="block h-auto w-full"
+        src={featuredHeroProduct.image}
+        alt={featuredHeroProduct.imageAlt}
+        width={1400}
+        height={890}
+        widths={[520, 760, 1040, 1400]}
+        sizes="(max-width: 820px) 92vw, 920px"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>

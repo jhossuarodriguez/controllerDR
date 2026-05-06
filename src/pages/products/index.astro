@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
+import "@/styles/global.css";
+import SEO from "@/components/ui/SEO.astro";
+import { products } from "@/lib/products";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products | Control RD</title>
+    <SEO
+      title="PS5 Controllers | Control RD"
+      description="Browse all available PS5 DualSense controllers in Dominican Republic. Original Sony controllers, limited colors, and DualSense Edge pro controller with local delivery."
+    />
+    <ClientRouter />
+  </head>
+  <body class="m-0 bg-white text-ink font-text">
+    <header class="sticky top-0 z-20 border-b border-silver-mist bg-fog/85 backdrop-blur-xl">
+      <nav class="mx-auto flex h-[52px] w-[min(100%-32px,1200px)] items-center justify-between" aria-label="Main navigation">
+        <a class="text-sm font-bold" href="/">Control RD</a>
+        <div class="hidden gap-6 text-xs text-slate sm:flex">
+          <a class="hover:text-ink" href="/products">Products</a>
+          <a class="hover:text-ink" href="/#about">About</a>
+          <a class="hover:text-ink" href="/#order">Order</a>
+        </div>
+        <a class="inline-flex min-h-9 items-center justify-center rounded-full bg-azure px-[18px] py-2 text-[17px] leading-none text-white" href="/#order">Buy</a>
+      </nav>
+    </header>
+
+    <main class="mx-auto w-[min(100%-32px,1200px)] py-16 sm:py-[84px]">
+      <p class="mb-2.5 text-[17px] font-semibold text-graphite">PS5 controllers available in Dominican Republic</p>
+      <h1 class="mb-12 max-w-[820px] font-display text-[clamp(52px,9vw,96px)] font-bold leading-[1.04] tracking-[-0.022em]">Choose your controller.</h1>
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {products.map((product) => (
+          <a class="grid min-h-[440px] content-between rounded-[28px] bg-fog p-7 transition hover:-translate-y-1.5" href={`/products/${product.slug}`}>
+            <div>
+              <Image class="h-[170px] w-full object-contain" src={product.image} alt={product.imageAlt} widths={[260, 420, 620]} sizes="(max-width: 620px) 100vw, (max-width: 980px) 50vw, 25vw" />
+              <h2 class="mb-2.5 mt-6 font-display text-[28px] font-semibold tracking-[-0.5px]">{product.name}</h2>
+              <p class="m-0 text-base leading-[1.45] text-graphite">{product.description}</p>
+            </div>
+            <div class="mt-6 text-xl font-bold">{product.price}</div>
+          </a>
+        ))}
+      </div>
+    </main>
+
+    <footer class="mx-auto w-[min(100%-32px,1200px)] border-t border-silver-mist py-6 text-xs text-graphite">Control RD. Original PS5 controller sourcing, pickup, and delivery coordination.</footer>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+---
+import { Image } from "astro:assets";
+import { products } from "@/lib/products";
+
+const landingProducts = products.slice(0, 3);
+
+if (landingProducts.length === 0) {
+  throw new Error("Products data not available");
+}
+
+const colorSwatches: Record<string, string> = {
+  White: "#ffffff",
+  "Midnight Black": "#111113",
+  "Cosmic Red": "#c91832",
+  "Starlight Blue": "#8fb7e8",
+  "Nova Pink": "#e8a2ba",
+  "Galactic Purple": "#5d4b8c",
+};
+---
+
+<section
+  class="bg-fog px-4 py-24 max-md:py-[72px]"
+  id="sell"
+  aria-labelledby="sell-title"
+>
+  <div class="mx-auto w-[min(100%,1200px)]">
+    <p class="mb-3 text-sm font-semibold text-graphite">What we sell</p>
+    <h2
+      class="mb-[42px] max-w-[780px] font-display text-[clamp(38px,6vw,64px)] font-bold leading-[1.07] tracking-[-0.9px]"
+      id="sell-title"
+    >
+      Controllers for every kind of player.
+    </h2>
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+      {
+        landingProducts.map((product) => (
+          <article class="min-h-[260px] rounded-[28px] bg-white p-7 transition hover:-translate-y-1.5">
+            <Image
+              class="mb-6 block h-[120px] w-full object-contain"
+              src={product.image}
+              alt={product.imageAlt}
+              width={280}
+              height={120}
+              widths={[200, 280, 360]}
+              sizes="(max-width: 820px) 100vw, 33vw"
+            />
+            <h3 class="mb-3 font-display text-[28px] font-semibold leading-[1.15] tracking-[-0.5px]">
+              <a href={`/products/${product.slug}`}>{product.name}</a>
+            </h3>
+            <p class="m-0 text-[17px] leading-[1.47] text-graphite">
+              {product.description}
+            </p>
+            <div class="mt-7 text-xl font-semibold">{product.price}</div>
+            <div
+              class="mt-7 flex gap-2"
+              aria-label={`${product.name} colors`}
+            >
+              {product.colors.map((color, colorIndex) => (
+                <button
+                  type="button"
+                  class:list={[
+                    "h-7 w-7 rounded-full border-[3px] border-graphite/25 transition-all hover:scale-110 cursor-pointer",
+                    colorIndex === 0 && "border-ink ring-2 ring-ink/30",
+                  ]}
+                  aria-label={`Select ${color} color`}
+                  style={`background:${colorSwatches[color] ?? "#e8e8ed"}`}
+                  data-color={color}
+                />
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll("[data-color]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const parent = btn.parentElement;
+      parent?.querySelectorAll("[data-color]").forEach((b: Element) => {
+        b.classList.remove("border-ink", "ring-2", "ring-ink/30");
+      });
+      btn.classList.add("border-ink", "ring-2", "ring-ink/30");
+    });
+  });
+</script>
