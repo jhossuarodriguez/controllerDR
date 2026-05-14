@@ -9,12 +9,18 @@ if (landingProducts.length === 0) {
 }
 
 const colorSwatches: Record<string, string> = {
-  White: "#ffffff",
-  "Midnight Black": "#111113",
+  "White": "#ffffff",
+  "Midnight Black": "linear-gradient(135deg, #09090A 0%, #111113 60%, #222226 100%)",
   "Cosmic Red": "#c91832",
   "Starlight Blue": "#8fb7e8",
   "Nova Pink": "#e8a2ba",
   "Galactic Purple": "#5d4b8c",
+  "Chroma Indigo": "linear-gradient(135deg, #1A0B5E 0%, #3F00FF 35%, #6900C6 70%, #9A00E6 100%)",
+  "Chroma Pearl": "linear-gradient(135deg, #FDFBF7 0%, #EAE5D9 40%, #E3E9E2 75%, #F5E6EC 100%)",
+  "Chroma Teal": "linear-gradient(135deg, #004B49 0%, #008080 35%, #00A3A3 70%, #76FFD4 100%)",
+  "Cobalt Blue": "linear-gradient(135deg, #001F54 0%, #0047AB 50%, #0074E4 100%)",
+  "Remix Green": "linear-gradient(180deg, #111113 0%, #111113 45%, #9dcb36 45%, #9dcb36 100%)",
+  "Rhythm Blue": "linear-gradient(180deg, #111113 0%, #111113 45%, #00A2E8 45%, #00A2E8 100%)"
 };
 ---
 
@@ -64,8 +70,8 @@ const colorSwatches: Record<string, string> = {
                 <button
                   type="button"
                   class:list={[
-                    "h-7 w-7 rounded-full border-[3px] border-graphite/25 transition-all hover:scale-110 cursor-pointer",
-                    colorIndex === 0 && "border-ink ring-2 ring-ink/30",
+                    "h-7 w-7 rounded-full border-[3px] transition-all hover:scale-110 cursor-pointer border-ink/80 ring-2 ring-ink/30",
+                    colorIndex === 0 && "ring-2 ring-ink/30",
                   ]}
                   aria-label={`Select ${color} color`}
                   style={`background:${colorSwatches[color] ?? "#e8e8ed"}`}
@@ -85,9 +91,9 @@ const colorSwatches: Record<string, string> = {
     btn.addEventListener("click", () => {
       const parent = btn.parentElement;
       parent?.querySelectorAll("[data-color]").forEach((b: Element) => {
-        b.classList.remove("border-ink", "ring-2", "ring-ink/30");
+        b.classList.remove("ring-4", "ring-ink/20");
       });
-      btn.classList.add("border-ink", "ring-2", "ring-ink/30");
+      btn.classList.add("ring-4", "ring-ink/20");
     });
   });
 </script>

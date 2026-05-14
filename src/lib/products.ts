@@ -28,7 +28,7 @@ export const products: Product[] = [
     imageAlt: "White PS5 DualSense controller",
     description: "Factory-sealed PS5 controller for players who want the original Sony feel, fast local coordination, and full console compatibility.",
     features: ["Haptic feedback", "Adaptive triggers", "Built-in microphone", "USB-C charging"],
-    colors: ["White", "Midnight Black"],
+    colors: ["White"],
   },
   {
     slug: "dualsense-cosmic-red",
@@ -39,7 +39,7 @@ export const products: Product[] = [
     imageAlt: "Cosmic Red PS5 DualSense controller",
     description: "Rotating DualSense colors for players who want their setup to look different without compromising original Sony performance.",
     features: ["Original Sony hardware", "Limited color availability", "PS5 and PC compatible", "Local delivery coordination"],
-    colors: ["Cosmic Red", "Starlight Blue", "Nova Pink", "Galactic Purple"],
+    colors: ["Midnight Black","Cosmic Red", "Starlight Blue", "Nova Pink", "Galactic Purple", "Chroma Indigo", "Chroma Pearl", "Cobalt Blue", "Remix Green", "Rhythm Blue"],
   },
   {
     slug: "dualsense-edge",
