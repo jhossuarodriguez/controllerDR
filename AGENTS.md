@@ -97,8 +97,8 @@ Larger, page-level sections composed of `ui/` primitives. Rules:
 
 Astro layout files that wrap entire pages. Rules:
 
-- `BaseLayout.astro` — minimal HTML shell with `<head>` and `<body>`.
-- Specialized layouts extend `BaseLayout`: `BlogLayout.astro`, `DocsLayout.astro`.
+- `Layout.astro` — minimal HTML shell with `<head>` and `<body>`.
+- Specialized layouts extend `Layout`: `BlogLayout.astro`, `DocsLayout.astro`.
 - Always include `<meta charset>`, `<meta viewport>`, and `<title>`.
 - Use `Astro.props.title` to allow per-page title overrides.
 - Inject global styles here — not in individual pages.
