@@ -35,21 +35,26 @@ const colorSwatches: Record<string, string> = {
       {
         landingProducts.map((product) => (
           <article class="min-h-[260px] rounded-[28px] bg-white p-7 transition hover:-translate-y-1.5">
-            <Image
-              class="mb-6 block h-[120px] w-full object-contain"
-              src={product.image}
-              alt={product.imageAlt}
-              width={280}
-              height={120}
-              widths={[200, 280, 360]}
-              sizes="(max-width: 820px) 100vw, 33vw"
-            />
-            <h3 class="mb-3 font-display text-[28px] font-semibold leading-[1.15] tracking-[-0.5px]">
-              <a href={`/products/${product.slug}`}>{product.name}</a>
-            </h3>
+            <a href={`/products/${product.slug}`}>
+              <Image
+                  class="mb-6 block h-[120px] w-full object-contain"
+                  src={product.image}
+                  alt={product.imageAlt}
+                  width={280}
+                  height={200}
+                  widths={[200, 280, 360]}
+                  sizes="(max-width: 820px) 100vw, 33vw"
+                />
+
+                <h3 class="mb-3 font-display text-[28px] font-semibold leading-[1.15] tracking-[-0.5px]">
+                  {product.name}
+                </h3>
+            </a>
+        
             <p class="m-0 text-[17px] leading-[1.47] text-graphite">
               {product.description}
             </p>
+
             <div class="mt-7 text-xl font-semibold">{product.price}</div>
             <div
               class="mt-7 flex gap-2"
