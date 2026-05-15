@@ -3,10 +3,13 @@ import { Image } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import "@/styles/global.css";
 import SEO from "@/components/ui/SEO.astro";
-import { products } from "@/lib/products";
+import { products, colorSwatches } from "@/lib/products";
 
 export function getStaticPaths() {
-  return products.map((product) => ({ params: { slug: product.slug }, props: { product } }));
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
 }
 
 const { product } = Astro.props;
@@ -29,44 +32,110 @@ const priceNumeric = product.price.replace(/[^\d]/g, "");
     <ClientRouter />
   </head>
   <body class="m-0 bg-white text-ink font-text">
-    <header class="sticky top-0 z-20 border-b border-silver-mist bg-fog/85 backdrop-blur-xl">
-      <nav class="mx-auto flex h-[52px] w-[min(100%-32px,1200px)] items-center justify-between" aria-label="Main navigation">
+    <header
+      class="sticky top-0 z-20 border-b border-silver-mist bg-fog/85 backdrop-blur-xl"
+    >
+      <nav
+        class="mx-auto flex h-[52px] w-[min(100%-32px,1200px)] items-center justify-between"
+        aria-label="Main navigation"
+      >
         <a class="text-sm font-bold" href="/">Control RD</a>
         <div class="hidden gap-6 text-xs text-slate sm:flex">
           <a class="hover:text-ink" href="/products">Products</a>
           <a class="hover:text-ink" href="/#about">About</a>
           <a class="hover:text-ink" href="/#order">Order</a>
         </div>
-        <a class="inline-flex min-h-9 items-center justify-center rounded-full bg-azure px-[18px] py-2 text-[17px] leading-none text-white" href="/#order">Buy</a>
+        <a
+          class="inline-flex min-h-9 items-center justify-center rounded-full bg-azure px-[18px] py-2 text-[17px] leading-none text-white"
+          href="/#order">Buy</a
+        >
       </nav>
     </header>
 
     <main class="mx-auto w-[min(100%-32px,1200px)] py-16 sm:py-[84px]">
-      <section class="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_0.9fr]" aria-labelledby="product-title">
-        <div class="grid min-h-0 place-items-center rounded-[28px] bg-white p-[clamp(28px,5vw,56px)] lg:min-h-[560px]">
-          <Image class="max-h-[460px] w-full object-contain" src={product.image} alt={product.imageAlt} widths={[360, 640, 920, 1200]} sizes="(max-width: 860px) 100vw, 50vw" loading="eager" />
+      <section
+        class="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_0.9fr]"
+        aria-labelledby="product-title"
+      >
+        <div
+          class="grid min-h-0 place-items-center rounded-[28px] bg-white p-[clamp(28px,5vw,56px)] lg:min-h-[560px]"
+        >
+          <Image
+            class="max-h-[460px] w-full object-contain"
+            src={product.image}
+            alt={product.imageAlt}
+            widths={[360, 640, 920, 1200]}
+            sizes="(max-width: 860px) 100vw, 50vw"
+            loading="eager"
+          />
         </div>
         <div class="rounded-[28px] bg-white p-[clamp(28px,5vw,56px)]">
-          <p class="mb-2.5 text-[17px] font-semibold text-graphite">{product.eyebrow}</p>
-          <h1 id="product-title" class="mb-[18px] font-display text-[clamp(48px,8vw,86px)] font-bold leading-[1.04] tracking-[-0.022em]">{product.name}</h1>
-          <p class="mb-7 text-xl leading-[1.45] text-graphite">{product.description}</p>
+          <p class="mb-2.5 text-[17px] font-semibold text-graphite">
+            {product.eyebrow}
+          </p>
+          <h1
+            id="product-title"
+            class="mb-[18px] font-display text-[clamp(48px,8vw,86px)] font-bold leading-[1.04] tracking-[-0.022em]"
+          >
+            {product.name}
+          </h1>
+          <p class="mb-7 text-xl leading-[1.45] text-graphite">
+            {product.description}
+          </p>
           <p class="mb-7 text-[28px] font-bold">{product.price}</p>
-          <h2 class="mb-3.5 mt-[34px] font-display text-[28px] font-semibold">Features</h2>
-          <ul class="grid gap-2.5 pl-5 text-[17px] leading-[1.45] text-graphite">
+          <h2 class="mb-3.5 mt-[34px] font-display text-[28px] font-semibold">
+            Features
+          </h2>
+          <ul
+            class="grid gap-2.5 pl-5 text-[17px] leading-[1.45] text-graphite"
+          >
             {product.features.map((feature) => <li>{feature}</li>)}
           </ul>
-          <h2 class="mb-3.5 mt-[34px] font-display text-[28px] font-semibold">Available colors</h2>
-          <ul class="grid gap-2.5 pl-5 text-[17px] leading-[1.45] text-graphite">
-            {product.colors.map((color) => <li>{color}</li>)}
-          </ul>
-          <div class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <a class="inline-flex min-h-9 items-center justify-center rounded-full bg-azure px-[18px] py-2 text-[17px] leading-none text-white" href="/#order">Request this controller</a>
+          <h2 class="mb-3.5 mt-[34px] font-display text-[28px] font-semibold">
+            Available colors
+          </h2>
+          <div
+            class="grid grid-cols-6 w-fit gap-2.5 pl-5 text-[17px] leading-[1.45] text-graphite"
+          >
+            {
+              product.colors.map((color, colorIndex) => (
+                <button
+                  type="button"
+                  class:list={[
+                    "h-7 w-7 rounded-full border-[3px] transition-all hover:scale-110 cursor-pointer ring-2 ring-ink/30",
+                    colorIndex === 0 && "ring-2 ring-ink/30",
+                  ]}
+                  aria-label={`Selected ${color} color`}
+                  style={`background:${colorSwatches[color] ?? "#e8e8ed"} `}
+                  data-color={color}
+                  data-image={product.colorImages?.[color]?.src ?? ""}
+                ></button>
+              ))
+            }
+          </div>
+          <div
+            class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
+          >
+            <a
+              class="inline-flex min-h-9 items-center justify-center rounded-full bg-azure px-[18px] py-2 text-[17px] leading-none text-white"
+              href="/#order">Request this controller</a
+            >
             <a class="text-[#0066cc]" href="/products">View all products</a>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="mx-auto w-[min(100%-32px,1200px)] border-t border-silver-mist py-6 text-xs text-graphite">Control RD. Original PS5 controller sourcing, pickup, and delivery coordination.</footer>
+    <footer
+      class="mx-auto w-[min(100%-32px,1200px)] border-t border-silver-mist py-6 text-xs text-graphite"
+    >
+      Control RD. Original PS5 controller sourcing, pickup, and delivery
+      coordination.
+    </footer>
   </body>
 </html>
+
+<script is:inline>
+  import { colorSwitcher } from "@/lib/colorSwitcher";
+  colorSwitcher();
+</script>
