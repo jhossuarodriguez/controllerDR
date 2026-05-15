@@ -1,10 +1,10 @@
 import type { ImageMetadata } from "astro";
 
-import limitedController from "@/assets/DualSense-Wireless-Controller-God-of-War-20th-Anniversary-Limited-Edition_d3930f03-e018-4802-9985-86821a5773e2.76841a299eef4220597bf98bbc4f6c83.avif";
-import heroController from "@/assets/DualSense-30-Hero-4.webp";
-import redController from "@/assets/PS5DUALSENSECR.webp";
-import edgeController from "@/assets/dualsense-edge-listing-thumb-01-en-23aug22.webp";
-import originalController from "@/assets/dualsense-1.webp";
+import limitedController from "@/assets/ps5-controller/god-of-war-limited-edition.avif";
+import heroController from "@/assets/ps5-controller/DualSense-30-Hero-4.avif";
+import redController from "@/assets/ps5-controller/cosmic-red.avif";
+import edgeController from "@/assets/ps5-controller/dualsense-edge-listing-thumb-01-en-23aug22.avif";
+import originalController from "@/assets/ps5-controller/dualsense-1.avif";
 
 export interface Product {
   slug: string;
@@ -39,7 +39,7 @@ export const products: Product[] = [
     imageAlt: "Cosmic Red PS5 DualSense controller",
     description: "Rotating DualSense colors for players who want their setup to look different without compromising original Sony performance.",
     features: ["Original Sony hardware", "Limited color availability", "PS5 and PC compatible", "Local delivery coordination"],
-    colors: ["Midnight Black","Cosmic Red", "Starlight Blue", "Nova Pink", "Galactic Purple", "Chroma Indigo", "Chroma Pearl", "Cobalt Blue", "Remix Green", "Rhythm Blue"],
+    colors: ["Midnight Black", "Cosmic Red", "Starlight Blue", "Nova Pink", "Galactic Purple", "Chroma Indigo", "Chroma Pearl", "Cobalt Blue", "Remix Green", "Rhythm Blue", "Sterling Silver", "Tecno Red"],
   },
   {
     slug: "dualsense-edge",

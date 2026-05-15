@@ -9,18 +9,28 @@ if (landingProducts.length === 0) {
 }
 
 const colorSwatches: Record<string, string> = {
-  "White": "#ffffff",
-  "Midnight Black": "linear-gradient(135deg, #09090A 0%, #111113 60%, #222226 100%)",
+  White: "#ffffff",
+  "Midnight Black":
+    "linear-gradient(135deg, #09090A 0%, #111113 60%, #222226 100%)",
   "Cosmic Red": "#c91832",
   "Starlight Blue": "#8fb7e8",
   "Nova Pink": "#e8a2ba",
   "Galactic Purple": "#5d4b8c",
-  "Chroma Indigo": "linear-gradient(135deg, #1A0B5E 0%, #3F00FF 35%, #6900C6 70%, #9A00E6 100%)",
-  "Chroma Pearl": "linear-gradient(135deg, #FDFBF7 0%, #EAE5D9 40%, #E3E9E2 75%, #F5E6EC 100%)",
-  "Chroma Teal": "linear-gradient(135deg, #004B49 0%, #008080 35%, #00A3A3 70%, #76FFD4 100%)",
-  "Cobalt Blue": "linear-gradient(135deg, #001F54 0%, #0047AB 50%, #0074E4 100%)",
-  "Remix Green": "linear-gradient(180deg, #111113 0%, #111113 45%, #9dcb36 45%, #9dcb36 100%)",
-  "Rhythm Blue": "linear-gradient(180deg, #111113 0%, #111113 45%, #00A2E8 45%, #00A2E8 100%)"
+  "Chroma Indigo":
+    "linear-gradient(135deg, #1A0B5E 0%, #3F00FF 35%, #6900C6 70%, #9A00E6 100%)",
+  "Chroma Pearl":
+    "linear-gradient(135deg, #FDFBF7 0%, #EAE5D9 40%, #E3E9E2 75%, #F5E6EC 100%)",
+  "Chroma Teal":
+    "linear-gradient(135deg, #004B49 0%, #008080 35%, #00A3A3 70%, #76FFD4 100%)",
+  "Cobalt Blue":
+    "linear-gradient(135deg, #001F54 0%, #0047AB 50%, #0074E4 100%)",
+  "Remix Green":
+    "linear-gradient(180deg, #111113 0%, #111113 45%, #9dcb36 45%, #9dcb36 100%)",
+  "Rhythm Blue":
+    "linear-gradient(180deg, #111113 0%, #111113 45%, #00A2E8 45%, #00A2E8 100%)",
+  "Sterling Silver": "#98a2b4",
+  "Tecno Red":
+    "linear-gradient(180deg, #111113 0%, #111113 45%, #e31a35 45%, #e31a35 100%)",
 };
 ---
 
@@ -43,27 +53,27 @@ const colorSwatches: Record<string, string> = {
           <article class="min-h-[260px] rounded-[28px] bg-white p-7 transition hover:-translate-y-1.5">
             <a href={`/products/${product.slug}`}>
               <Image
-                  class="mb-6 block h-[120px] w-full object-contain"
-                  src={product.image}
-                  alt={product.imageAlt}
-                  width={280}
-                  height={200}
-                  widths={[200, 280, 360]}
-                  sizes="(max-width: 820px) 100vw, 33vw"
-                />
+                class="mb-6 block h-[120px] w-full object-contain"
+                src={product.image}
+                alt={product.imageAlt}
+                width={280}
+                height={200}
+                widths={[200, 280, 360]}
+                sizes="(max-width: 820px) 100vw, 33vw"
+              />
 
-                <h3 class="mb-3 font-display text-[28px] font-semibold leading-[1.15] tracking-[-0.5px]">
-                  {product.name}
-                </h3>
+              <h3 class="mb-3 font-display text-[28px] font-semibold leading-[1.15] tracking-[-0.5px]">
+                {product.name}
+              </h3>
             </a>
-        
+
             <p class="m-0 text-[17px] leading-[1.47] text-graphite">
               {product.description}
             </p>
 
             <div class="mt-7 text-xl font-semibold">{product.price}</div>
             <div
-              class="mt-7 flex gap-2"
+              class="mt-5 gap-2 flex flex-wrap flex-1"
               aria-label={`${product.name} colors`}
             >
               {product.colors.map((color, colorIndex) => (
