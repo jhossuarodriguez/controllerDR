@@ -25,17 +25,22 @@ if (landingProducts.length === 0) {
     <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
       {
         landingProducts.map((product) => (
-          <article class="min-h-[260px] rounded-[28px] bg-white p-7 transition hover:-translate-y-1.5">
+          <article class="min-h-[260px] rounded-[28px] bg-white p-7 transition hover:-translate-y-1.5" data-color-container>
             <a href={`/products/${product.slug}`}>
-              <Image
-                class="mb-6 block h-[120px] w-full object-contain"
-                src={product.image}
-                alt={product.imageAlt}
-                width={280}
-                height={200}
-                widths={[200, 280, 360]}
-                sizes="(max-width: 820px) 100vw, 33vw"
-              />
+            {
+              product.colors.map((color, index) => (
+                <Image
+                  data-color-image={color}
+                  class:list={["mb-6 block h-auto w-full object-contain", index !== 0 && "hidden"]}
+                  src={product.colorImages?.[color] ?? product.image}
+                  alt={`${product.name} in ${color}`}
+                  width={280}
+                  height={200}
+                  widths={[200, 280, 360]}
+                  sizes="(max-width: 820px) 100vw, 33vw"
+                />
+              ))
+            }
 
               <h3 class="mb-3 font-display text-[28px] font-semibold leading-[1.15] tracking-[-0.5px]">
                 {product.name}
