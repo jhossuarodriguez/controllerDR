@@ -8,6 +8,7 @@ interface Props {
   price?: string;
   currency?: string;
   availability?: "in_stock" | "out_of_stock" | "preorder";
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -19,12 +20,20 @@ const {
   price,
   currency = "DOP",
   availability = "in_stock",
+  structuredData,
 } = Astro.props;
 
 const baseUrl = Astro.site || Astro.url;
 const urlObj = typeof url === "string" ? new URL(url, baseUrl) : url;
 const canonicalURL = new URL(urlObj.pathname, baseUrl);
-const socialImageURL = new URL(image, baseUrl);
+const socialImageURL = image ? new URL(image, baseUrl) : undefined;
+const organizationURL = new URL("/", baseUrl);
+const logoURL = new URL("/favicon.svg", baseUrl);
+const structuredDataItems = structuredData
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : [];
 ---
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -34,7 +43,7 @@ const socialImageURL = new URL(image, baseUrl);
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <meta name="author" content="Control RD" />
-<meta name="robots" content="index, follow" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Open Graph / Facebook -->
@@ -42,7 +51,7 @@ const socialImageURL = new URL(image, baseUrl);
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={socialImageURL} />
+{socialImageURL && <meta property="og:image" content={socialImageURL} />}
 <meta property="og:site_name" content="Control RD" />
 <meta property="og:locale" content="es_DO" />
 
@@ -61,7 +70,7 @@ const socialImageURL = new URL(image, baseUrl);
 <meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={socialImageURL} />
+{socialImageURL && <meta property="twitter:image" content={socialImageURL} />}
 
 <!-- JSON-LD Structured Data -->
 {type === "product" && price && (
@@ -70,7 +79,11 @@ const socialImageURL = new URL(image, baseUrl);
     "@type": "Product",
     name: title,
     description: description,
-    image: socialImageURL.toString(),
+    ...(socialImageURL ? { image: socialImageURL.toString() } : {}),
+    brand: {
+      "@type": "Brand",
+      name: "Sony PlayStation",
+    },
     offers: {
       "@type": "Offer",
       price: price,
@@ -81,7 +94,7 @@ const socialImageURL = new URL(image, baseUrl);
     seller: {
       "@type": "Organization",
       name: "Control RD",
-      url: Astro.url.origin,
+      url: organizationURL.toString(),
     },
   })} />
 )}
@@ -92,8 +105,8 @@ const socialImageURL = new URL(image, baseUrl);
     "@type": "Organization",
     name: "Control RD",
     description: description,
-    url: Astro.url.origin,
-    logo: new URL("/logo.svg", Astro.url.origin).toString(),
+    url: organizationURL.toString(),
+    logo: logoURL.toString(),
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales",
@@ -106,3 +119,7 @@ const socialImageURL = new URL(image, baseUrl);
     sameAs: [],
   })} />
 )}
+
+{structuredDataItems.map((item) => (
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(item)} />
+))}

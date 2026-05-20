@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "node:url";
 
 export default defineConfig({
+  site: "https://controlrd.com",
   vite: {
     resolve: {
       alias: {

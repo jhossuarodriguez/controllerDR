@@ -4,17 +4,51 @@ import { ClientRouter } from "astro:transitions";
 import "@/styles/global.css";
 import SEO from "@/components/ui/SEO.astro";
 import { products } from "@/lib/products";
+
+const baseUrl = Astro.site ?? Astro.url;
+const productsUrl = new URL("/products", baseUrl);
+const itemListStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "PS5 Controllers in Dominican Republic",
+  itemListElement: products.map((product, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    url: new URL(`/products/${product.slug}`, baseUrl).toString(),
+    name: product.name,
+  })),
+};
+const breadcrumbStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: new URL("/", baseUrl).toString(),
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Products",
+      item: productsUrl.toString(),
+    },
+  ],
+};
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Products | Control RD</title>
+    <title>PS5 Controllers in Dominican Republic | Control RD</title>
     <SEO
-      title="PS5 Controllers | Control RD"
+      title="PS5 Controllers in Dominican Republic | Control RD"
       description="Browse all available PS5 DualSense controllers in Dominican Republic. Original Sony controllers, limited colors, and DualSense Edge pro controller with local delivery."
+      image={products[0]?.image.src}
+      structuredData={[itemListStructuredData, breadcrumbStructuredData]}
     />
     <ClientRouter />
   </head>
@@ -33,12 +67,12 @@ import { products } from "@/lib/products";
 
     <main class="mx-auto w-[min(100%-32px,1200px)] py-16 sm:py-[84px]">
       <p class="mb-2.5 text-[17px] font-semibold text-graphite">PS5 controllers available in Dominican Republic</p>
-      <h1 class="mb-12 max-w-[820px] font-display text-[clamp(52px,9vw,96px)] font-bold leading-[1.04] tracking-[-0.022em]">Choose your controller.</h1>
+      <h1 class="mb-12 max-w-[820px] font-display text-[clamp(52px,9vw,96px)] font-bold leading-[1.04] tracking-[-0.022em]">PS5 controllers in Dominican Republic.</h1>
       <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {products.map((product) => (
           <a class="grid min-h-[440px] content-between rounded-[28px] bg-fog p-7 transition hover:-translate-y-1.5" href={`/products/${product.slug}`}>
             <div>
-              <Image class="h-[170px] w-full object-contain" src={product.image} alt={product.imageAlt} widths={[260, 420, 620]} sizes="(max-width: 620px) 100vw, (max-width: 980px) 50vw, 25vw" />
+              <Image class="h-[170px] w-full object-contain" src={product.image} alt={product.imageAlt} widths={[260, 420, 620]} sizes="(max-width: 620px) 100vw, (max-width: 980px) 50vw, 25vw" loading="lazy" />
               <h2 class="mb-2.5 mt-6 font-display text-[28px] font-semibold tracking-[-0.5px]">{product.name}</h2>
               <p class="m-0 text-base leading-[1.45] text-graphite">{product.description}</p>
             </div>

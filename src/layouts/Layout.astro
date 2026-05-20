@@ -5,21 +5,25 @@ import SEO from "@/components/ui/SEO.astro";
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description } = Astro.props;
+const { title, description, image, structuredData } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <SEO
-      title={title}
-      description={description ?? "Original Sony PS5 DualSense controllers available in Dominican Republic. Fast local delivery, same-day coordination in Santo Domingo."}
-    />
+      <SEO
+        title={title}
+        description={description ?? "Original Sony PS5 DualSense controllers available in Dominican Republic. Fast local delivery, same-day coordination in Santo Domingo."}
+        image={image}
+        structuredData={structuredData}
+      />
     <ClientRouter />
   </head>
   <body class="m-0 bg-white text-ink font-text">

@@ -9,11 +9,25 @@ import ProductShowcase from "@/components/sections/ProductShowcase.astro";
 import About from "@/components/sections/About.astro";
 import CTA from "@/components/sections/CTA.astro";
 import OrderForm from "@/components/sections/OrderForm.astro";
+import { featuredHeroProduct } from "@/lib/products";
+
+const siteURL = new URL("/", Astro.site ?? Astro.url);
+const homeStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Control RD",
+  url: siteURL.toString(),
+  inLanguage: "es-DO",
+  description:
+    "Original Sony PS5 DualSense controllers available in Dominican Republic with local delivery coordination.",
+};
 ---
 
 <Layout
   title="Control RD | PS5 Controllers in Dominican Republic"
   description="Original Sony PS5 DualSense controllers available in Dominican Republic. Fast local delivery, same-day coordination in Santo Domingo. Limited colors and DualSense Edge pro controller."
+  image={featuredHeroProduct.image.src}
+  structuredData={homeStructuredData}
 >
   <Header />
 
