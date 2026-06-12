@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import "@/styles/global.css";
 import SEO from "@/components/ui/SEO.astro";
-import { products, colorSwatches } from "@/lib/products";
+import { colorSwatches, products } from "@/lib/products";
 
 export function getStaticPaths() {
   return products.map((product) => ({
