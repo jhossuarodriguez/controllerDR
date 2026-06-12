@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       #Descarga archivos en esa maquina
 
-      - uses: pnpm/actions-setup@v4
+      - uses: pnpm/action-setup@v4
       #Instala pnpm (No viene por default en github)
 
       - uses: actions/setup-node@v4
