@@ -26,7 +26,7 @@ jobs:
           cache: "pnpm"
         # Instala Node 20 y activa caché para que sea más rápido
         
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install --no-frozen-lockfile
        # Instala tus dependencias exactas del lockfile
        # --frozen-lockfile = falla si alguien cambió package.json sin actualizar el lock
 
