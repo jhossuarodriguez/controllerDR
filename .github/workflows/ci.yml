@@ -17,7 +17,7 @@ jobs:
 
       - uses: pnpm/action-setup@v3
         with:
-          version: 8
+          version: 11.3.0
       #Instala pnpm (No viene por default en github)
 
       - uses: actions/setup-node@v4
